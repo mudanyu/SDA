@@ -1,6 +1,7 @@
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 @Data
@@ -18,18 +19,18 @@ public class DailyCompanyStock {
     //最低价
     private BigDecimal lowestPrice;
     //幅度
-    private Double route;
+    private BigDecimal route;
     //最高幅度
-    private Double highestRoute;
+    private BigDecimal highestRoute;
     //最低幅度
-    private Double lowestRoute;
+    private BigDecimal lowestRoute;
     //日期
     private Date date;
 
     public DailyCompanyStock() {
     }
 
-    public DailyCompanyStock(String name, String code, BigDecimal startPrice, Double route, Double highestRoute, Double lowestRoute, Date date) {
+    public DailyCompanyStock(String name, String code, BigDecimal startPrice, BigDecimal route, BigDecimal highestRoute, BigDecimal lowestRoute, Date date) {
         this.name = name;
         this.code = code;
         startPrice = startPrice;
@@ -37,8 +38,8 @@ public class DailyCompanyStock {
         highestRoute = highestRoute;
         lowestRoute = lowestRoute;
         this.date = date;
-        endPrice = startPrice.multiply(new BigDecimal(1+route));
-        highestPrice = startPrice.multiply(new BigDecimal(1+highestRoute));
-        lowestPrice = startPrice.multiply(new BigDecimal(1+lowestRoute));
+        endPrice = startPrice.multiply(route.add(new BigDecimal(1))).setScale(2, RoundingMode.HALF_UP);
+        highestPrice = startPrice.multiply(highestRoute.add(new BigDecimal(1))).setScale(2, RoundingMode.HALF_UP);
+        lowestPrice = startPrice.multiply(lowestRoute.add(new BigDecimal(1))).setScale(2, RoundingMode.HALF_UP);
     }
 }
