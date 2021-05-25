@@ -15,6 +15,20 @@ public class CompanyStock {
     private BigDecimal price;
     //幅度
     private BigDecimal route;
+    //开盘价
+    private BigDecimal todayStartPrice;
+    //收盘价
+    private BigDecimal todayEndPrice;
+    //最高价
+    private BigDecimal todayHighestPrice;
+    //最低价
+    private BigDecimal todayLowestPrice;
+    //幅度
+    private BigDecimal todayRoute;
+    //最高幅度
+    private BigDecimal todayHighestRoute;
+    //最低幅度
+    private BigDecimal todayLowestRoute;
 
     private List<DailyCompanyStock> dailyCompanyStockList;
 
@@ -44,6 +58,13 @@ public class CompanyStock {
         DailyCompanyStock stock = new DailyCompanyStock(name,code,price,route1.getRoute(),route1.getHighestRoute(),route1.getLowestRoute(),now);
         price = stock.getEndPrice();
         route = route.add(stock.getRoute()) ;
+        todayStartPrice = stock.getStartPrice();
+        todayEndPrice = stock.getEndPrice();
+        todayHighestPrice = stock.getHighestPrice();
+        todayLowestPrice = stock.getLowestPrice();
+        todayRoute = stock.getRoute();
+        todayHighestRoute = stock.getHighestRoute();
+        todayLowestRoute = stock.getLowestRoute();
         dailyCompanyStockList.add(stock);
     }
 

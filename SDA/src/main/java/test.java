@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 public class test {
@@ -12,6 +13,8 @@ public class test {
             Date date = DateUtil.addDate(now,5,i);
             companyStock1.oneDay(date);
             System.out.println(companyStock1);
+            companyStock2.oneDay(date);
+            System.out.println(companyStock2);
         }
     }
 }
