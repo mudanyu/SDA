@@ -18,5 +18,18 @@ public class UserCompanyStock {
     //幅度
     private BigDecimal ratio;
 
+    public UserCompanyStock(){
+
+    }
+
+    public UserCompanyStock(CompanyStock companyStock, BigDecimal totalInput, BigDecimal totalMoney, BigDecimal availMoney, int availNum, int totalNum, BigDecimal ratio) {
+        this.companyStock = companyStock;
+        this.totalInput = totalInput;
+        this.totalMoney = totalMoney;
+        this.availMoney = availMoney;
+        this.availNum = availNum;
+        this.totalNum = totalNum;
+        this.ratio = ratio;
+    }
 
 }

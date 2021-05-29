@@ -54,8 +54,8 @@ public class Account {
 
             }else {
 
-                userCompanyStock.setTotalNum(userCompanyStock.getTotalNum() + num);
-                totalInput = totalInput.add(sellTotalPrice);
+                userCompanyStock.setTotalNum(userCompanyStock.getTotalNum() - num);
+                totalInput = totalInput.subtract(sellTotalPrice);
                 availMoney = availMoney.subtract(sellTotalPrice);
                 totalMoney = companyStock.getTodayEndPrice().multiply(new BigDecimal(userCompanyStock.getTotalNum()));
                 ratio = getRatio();
