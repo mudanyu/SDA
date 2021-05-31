@@ -1,6 +1,7 @@
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -28,10 +29,11 @@ public class Account {
     }
 
     //买入
-    public void buy(int num ,BigDecimal route,UserCompanyStock userCompanyStock){
+    public void buy(int num , BigDecimal route, UserCompanyStock userCompanyStock, Date now){
         CompanyStock companyStock = userCompanyStock.getCompanyStock();
-        if(!(route.compareTo(companyStock.getTodayHighestRoute())==1||route.compareTo(companyStock.getTodayLowestRoute())==-1)){
-            BigDecimal buyPrice = route.add(new BigDecimal(1)).multiply(companyStock.getTodayStartPrice());
+        DailyCompanyStock dstock = companyStock.getByDate(now);
+        if(!(route.compareTo(dstock.getHighestRoute())==1||route.compareTo(dstock.getLowestRoute())==-1)){
+            BigDecimal buyPrice = route.add(new BigDecimal(1)).multiply(dstock.getStartPrice());
             BigDecimal buyTotalPrice = buyPrice.multiply(new BigDecimal(num));
             if(availMoney.compareTo(buyTotalPrice)==-1){
 
@@ -45,10 +47,11 @@ public class Account {
         }
     }
     //卖出
-    public void sell(int num,BigDecimal route,UserCompanyStock userCompanyStock){
+    public void sell(int num,BigDecimal route,UserCompanyStock userCompanyStock, Date now){
         CompanyStock companyStock = userCompanyStock.getCompanyStock();
-        if(!(route.compareTo(companyStock.getTodayHighestRoute())==1||route.compareTo(companyStock.getTodayLowestRoute())==-1)){
-            BigDecimal sellPrice = route.add(new BigDecimal(1)).multiply(companyStock.getTodayStartPrice());
+        DailyCompanyStock dstock = companyStock.getByDate(now);
+        if(!(route.compareTo(dstock.getHighestRoute())==1||route.compareTo(dstock.getLowestRoute())==-1)){
+            BigDecimal sellPrice = route.add(new BigDecimal(1)).multiply(dstock.getStartPrice());
             BigDecimal sellTotalPrice = sellPrice.multiply(new BigDecimal(num));
             if(userCompanyStock.getAvailNum()<num){
 
@@ -72,4 +75,14 @@ public class Account {
         System.out.println(a);
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "totalInput=" + totalInput +
+                ", totalMoney=" + totalMoney +
+                ", availMoney=" + availMoney +
+                ", ratio=" + ratio +
+                ", stockList=" + stockList +
+                '}';
+    }
 }

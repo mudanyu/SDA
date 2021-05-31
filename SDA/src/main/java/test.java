@@ -29,10 +29,18 @@ public class test {
         BigDecimal ratio = new BigDecimal(0);
         //选购股票
         List<UserCompanyStock> stockList = new ArrayList<UserCompanyStock>();
-
+        UserCompanyStock stock1 = new UserCompanyStock(companyStock1.getCode(),companyStock1,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0),0,0,new BigDecimal(0));
+        UserCompanyStock stock2 = new UserCompanyStock(companyStock2.getCode(),companyStock2,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0),0,0,new BigDecimal(0));
+        stockList.add(stock1);
+        stockList.add(stock2);
         Account amount = new Account(totalInput,totalMoney,availMoney,ratio,stockList);
-        amount.buy(2500,new BigDecimal(0),companyStock1.);
+        amount.buy(2500,new BigDecimal(0),stock1,now);
+        for(int i = 0;i<days;i++) {
+            Date date = DateUtil.addDate(now,5,i);
+            amount.buy(2500,new BigDecimal(-0.02),stock1,date);
+        }
         //amount.getStockList()
+        System.out.println(amount);
     }
 
 }

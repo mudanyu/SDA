@@ -1,6 +1,7 @@
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +69,17 @@ public class CompanyStock {
         dailyCompanyStockList.add(stock);
     }
 
+    public DailyCompanyStock getByDate(Date now){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String time = format.format(now);
+        for (DailyCompanyStock stock : dailyCompanyStockList) {
+            if(time.equals(stock.getDate())){
+                return stock;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "CompanyStock{" +
@@ -75,6 +87,13 @@ public class CompanyStock {
                 ", code='" + code + '\'' +
                 ", price=" + price +
                 ", route=" + route +
+                ", todayStartPrice=" + todayStartPrice +
+                ", todayEndPrice=" + todayEndPrice +
+                ", todayHighestPrice=" + todayHighestPrice +
+                ", todayLowestPrice=" + todayLowestPrice +
+                ", todayRoute=" + todayRoute +
+                ", todayHighestRoute=" + todayHighestRoute +
+                ", todayLowestRoute=" + todayLowestRoute +
                 ", dailyCompanyStockList=" + dailyCompanyStockList +
                 '}';
     }
